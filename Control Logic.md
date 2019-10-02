@@ -111,3 +111,14 @@ class fibonacci_core(object):
 
 A core must specify how to generate the next output and state in the `_call_`.
 And expose `zero_state()`, `initial_state()`, `output_size`, `state_size`.
+
+```python
+inputs = tf.reshape(tf.range(10), [10, 1, 1])
+fib_seq = tf.nn.dynamic_rnn(
+ cell=fibonacci_core(),
+ inputs=inputs,
+ dtype=tf.float32,
+ time_major=True)
+with tf.train.MonitoredSession() as sess:
+ print(sess.run(fib_seq))
+```

@@ -79,3 +79,35 @@ final_i, power = tf.while_loop(
  body=body,
  loop_vars=(0, tf.diag([1., 1.])))
  ```
+
+## Dynamic Unrolling 
+
+In Deep Learning and Reinforcement Learning it is common to have to apply the same
+transformation (core) recursively to some state, in order to accumulate some sequence
+of outputs along the way. This is important for:
+
+● Time series prediction
+
+● Sequence to sequence models
+
+● Take decisions in partially observable domains
+
+Tensorflow provides ad-hoc utility functions to do this in graph.
+
+For Fibonacci:
+```python
+class fibonacci_core(object):
+ def __init__(self):
+ self.output_size = 1
+ self.state_size = tf.TensorShape([1,1])
+ def __call__(self, input, state):
+ return state[0]+state[1], (state[1], state[0]+state[1])
+ def zero_state(self, batch_size, dtype):
+ return (tf.zeros((batch_size, 1), dtype=dtype),
+ tf.ones((batch_size, 1), dtype=dtype))
+ def initial_state(self, batch_size, dtype):
+ return zero_state(self, batch_size, dtype)
+```
+
+A core must specify how to generate the next output and state in the `_call_`.
+And expose `zero_state()`, `initial_state()`, `output_size`, `state_size`.

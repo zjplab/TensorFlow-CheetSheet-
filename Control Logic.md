@@ -4,7 +4,7 @@ This is especially important to write high performance RL agents in TensorFlow.
 
 The main Ops used in order to specify the control logic in the graph are:
 
-- [tf.control_dependencies](#Control Dependency): add dependencies between nodes.
+- [tf.control_dependencies](#control-dependency): add dependencies between nodes.
 - tf.cond: true/false conditional.
 - tf.case: multi-case conditional.
 - tf.while_loop: while loop.

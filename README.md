@@ -5,7 +5,7 @@ TensorFlow is F*** complex. So this repo exists to serve as my personal TF refer
 
 # Contents
 
-- [Control Logic](control-logic.md)
+- [Control Logic](Control Logic.md)
 
 # Reference
 
